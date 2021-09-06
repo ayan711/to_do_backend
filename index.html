@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
+    <script src="main.js" type="application/javascript"></script>
     <title>TODOs List</title>
 </head>
 
@@ -20,7 +20,8 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        
+        
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -100,62 +101,36 @@
 
 <!-- <script src='main.js'></script> -->
 
-<table class="display" id="activityDisplay">
-    <thead>
+<table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" style="width: 600px;">
+    <thead class='table-dark'>
         <tr>
-            <th scope="col">Sr. No.</th>
-            <th scope="col">Item Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Sr. No.  </th>
+            <th scope="col">Item Title  </th>
+            <th scope="col">Description   </th>
+            <th scope="col">Actions </th>
         </tr>
     </thead>
     <tbody id = "data">
         <tr>
-            <!-- <th scope="row"></th>
-            <td>Get some coffee</td>
-            <td>Coffee is essential</td>
-            <td><button class="btn btn-danger btn-sm btn-primary">Delete</button></td> -->
+            
 
         </tr>
     </tbody>
 </table>
-<script>
-    fetch('http://127.0.0.1:5000/activities').then( res => { res.json().then(
 
-        activity=>{
+<br>
+<br>
+<h5 align='center'> Under Development by Ayan <h5>
 
-            console.log(activity);
-            console.log(activity.length);
+<!-- $('table tr').each(function(index, row) {
+    // build the id, the same way as if you were building it on the server
+    var id = 'Row' + (index + 1);
 
-           if (activity.length> 0){
-                var temp ='';
-                //looping
+    // get the corresponding textbox that's inside this row
+    var textbox = $('input[type="text"]', row);
 
-                for (let i=0;i<activity.length;i++)
-                
-                  {
-                     temp+="<tr>";
-                    temp+="<td>"+activity[i][0]+"</td>";
-                    temp+="<td>"+activity[i][1]+"</td>";
-                    temp+="<td>"+activity[i][2]+"</td>";
-
-
-                 };
-
-                 document.getElementById("data").innerHTML = temp;
-            }
-
-
-
-        }
-    
-    )
-        
-    }
-     )
-</script>
-
-
+    ...
+}); -->
 
 
 
