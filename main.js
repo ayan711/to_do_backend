@@ -4,44 +4,66 @@ window.onload = function(){
   allTasks();
 }
 
-function deleteActivity(tableData){
+// window.onclick = function(){
+//   getNewTasks();
+// }
 
-  console.log("Clicked delete")
+// after deletion
+function displayDeleteMsg(){
+  alert("Activity has been successfully deleted");
+}
 
-  a="<div class='alert alert-success' role='alert'>"+"Task has been deleted !!!"+"</div>"
-  document.getElementsByClassName("container").innerHTML = a;
+async function deleteActivity(tableData){
 
-  console.log("Showed Alert")
-  // <div class='alert alert-success' role='alert'>"+"Task has been deleted !!!"+"</div>
-  // //a=alert("Are you sure you wantto delete the activity");
+  var answer = window.confirm("Are you sure you want to delete activity ?");
+  console.log(answer);
+  if (answer == true) {
+      //some code
+      console.log("Clicked delete")
 
-  // console.log(tableData);
-  // // Getting the id from the row which is clicked using 'getAttribute function'
-  // console.log(tableData.getAttribute("id"));
-  // let id=tableData.getAttribute("id")
-  // Promise.all([
+  // a="<div class='alert alert-success' role='alert'>"+"Task has been deleted !!!"+"</div>"
+  // document.getElementsByClassName("container").innerHTML = a;
 
-  //   fetch('http://127.0.0.1:5000/delete/'+id, {
-  //       method: 'GET',
+  console.log(tableData);
+  // Getting the id from the row which is clicked using 'getAttribute function'
+  console.log(tableData.getAttribute("id"));
+  let id=tableData.getAttribute("id")
+  Promise.all([
+
+    fetch('http://127.0.0.1:5000/delete/'+id, {
+        method: 'GET',
     
-  //       headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+        headers: { 'Content-type': 'application/x-www-form-urlencoded' },
     
-  //   })]).then(async([aa]) => {
+    })]).then(async([aa]) => {
       
 
-  //     // Calling allTasks to get the new data after delete
-  //     allTasks();
-  //     '<div class="alert alert-success" role="alert">'+'Task has been deleted !!!'+'</div>'
-  //     console.log('Displayed alert message')
+      // Calling allTasks to get the new data after delete
+      await allTasks();
+      '<div class="alert alert-success" role="alert">'+'Task has been deleted !!!'+'</div>'
+      console.log('Going to display alert message');
 
-  //   }).catch((err) => {
-  //       console.error(err);
-  //   });
+    }).then(async([aa]) => {
+      let a = await aa.json();    
+      displayDeleteMsg();
 
+      console.log('Displayed alert message')
+
+    }).catch((err) => {
+        console.error(err);
+    });
+  }
+  else {
+
+    console.log("Activity not deleted")
+      allTasks();
+  }
+
+  
 }
 
 //Promise.all waits for all the inside defined activity to complete and give output and then proceeds  
-function allTasks(){
+async function allTasks(){
 Promise.all([
 
 fetch('http://127.0.0.1:5000/activities', {
@@ -87,4 +109,33 @@ fetch('http://127.0.0.1:5000/activities', {
 }).catch((err) => {
     console.error(err);
 });   
+}
+
+async function getNewTasks(){
+  
+  
+  activityName=document.getElementById("title").value;
+  console.log(activityName);
+
+  activityDesc=document.getElementById("description").value;
+  console.log(activityDesc);
+  apiInsert='http://127.0.0.1:5000/insert/'+activityName+"/"+activityDesc
+  console.log(apiInsert)
+
+  Promise.all([
+
+    fetch('http://127.0.0.1:5000/insert/'+activityName+'/'+activityDesc, {
+        method: 'POST',
+    
+        headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+    
+    })]).then(async(res) => {
+      
+      allTasks();
+    
+    }).catch((err) => {
+        console.error(err);
+    }); 
+
+
 }

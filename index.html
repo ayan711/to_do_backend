@@ -11,6 +11,13 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="main.js" type="application/javascript"></script>
     <title>TODOs List</title>
+    <style>
+        .Activity_List{
+            align-content: center;
+            display: flex;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -66,7 +73,7 @@
             <textarea class="form-control" id="description" rows="3"></textarea>
         </div>
 
-        <button type="submit" id="add" class="btn btn-primary">Add to list</button>
+        <button type="submit" id="add" class="btn btn-primary" onclick="getNewTasks()">Add to list</button>
 
         <!-- <div id="items" class="my-4">
             <h2>Your Items</h2>
@@ -100,8 +107,8 @@
 </div>
 
 <!-- <script src='main.js'></script> -->
-
-<table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" style="width: 600px;">
+<div class="Activity_List">
+<table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" >
     <thead class='table-dark'>
         <tr>
             <th scope="col">Sr. No.  </th>
@@ -117,6 +124,8 @@
         </tr>
     </tbody>
 </table>
+
+</div>
 
 <br>
 <br>

@@ -36,15 +36,15 @@ def allActivity():
 
 # @app.route('/insert')
 # def insertActivity():
-@app.route('/insert/<int:activity_ID>/<string:activity_desc>/<string:activity>')
-def insertActivity(activity_ID,activity_desc,activity):
+@app.route('/insert/<string:activity_desc>/<string:activity>',methods = ['POST'])
+def insertActivity(activity_desc,activity):
 
     ## Cursor objects interact with the MySQL server using a MySQLConnection object.
     cur = mysql.connection.cursor()
 
 
-    query_addActivity="INSERT INTO user_activity VALUES (%s,%s,%s,default,0)" # WHERE State like %s AND County like %s "
-    cur.execute(query_addActivity,(activity_ID,activity,activity_desc) )
+    query_addActivity="INSERT INTO user_activity VALUES (%s,%s,default,0)"
+    cur.execute(query_addActivity,(activity,activity_desc) )
 
     ## Since auto commit does not happens....using commit to modify the table
     mysql.connection.commit()
