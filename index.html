@@ -12,10 +12,12 @@
     <script src="main.js" type="application/javascript"></script>
     <title>TODOs List</title>
     <style>
-        .Activity_List{
-            align-content: center;
-            display: flex;
-            width: 100%;
+
+        #activityDisplay{
+            margin-left: 50mm;
+            text-align:center;
+            width: 70%;
+
         }
     </style>
 </head>
@@ -65,15 +67,16 @@
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">Add an item to the list.</small>
+            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" required="required">
+            <small id="emailHelp" class="form-text text-muted">Add an activity to the list.</small>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <textarea class="form-control" id="description" rows="3" required="required"></textarea>
         </div>
 
-        <button type="submit" id="add" class="btn btn-primary" onclick="getNewTasks()">Add to list</button>
+        <button type="submit" id="add" class="btn btn-primary" onclick="addNewTasks()">Add to list</button>
+        <div class="alert alert-danger" role="alert" id="forceEnter"></div>
 
         <!-- <div id="items" class="my-4">
             <h2>Your Items</h2>
@@ -100,19 +103,18 @@
     </div>
 
     <div class="container">
-    <h3>Activities present :</h3>
+    <h3>Activities Performed :</h3>
     <br>
-    <div id='activities'>  </div>
   
 </div>
 
 <!-- <script src='main.js'></script> -->
-<div class="Activity_List">
+
 <table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" >
     <thead class='table-dark'>
         <tr>
             <th scope="col">Sr. No.  </th>
-            <th scope="col">Item Title  </th>
+            <th scope="col">Activity Name  </th>
             <th scope="col">Description   </th>
             <th scope="col">Actions </th>
         </tr>
@@ -125,7 +127,6 @@
     </tbody>
 </table>
 
-</div>
 
 <br>
 <br>

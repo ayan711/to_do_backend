@@ -2,6 +2,11 @@
 //requiring path and fs modules
 window.onload = function(){
   allTasks();
+
+  //document.getElementById('forceEnter').style.display = 'none';
+  $('#forceEnter').hide();
+  //$(document).ready(function() {$('#forceEnter').hide();});
+  
 }
 
 // window.onclick = function(){
@@ -64,8 +69,10 @@ async function deleteActivity(tableData){
 
 //Promise.all waits for all the inside defined activity to complete and give output and then proceeds  
 async function allTasks(){
+  $('#forceEnter').hide();
+  
 Promise.all([
-
+ 
 fetch('http://127.0.0.1:5000/activities', {
     method: 'GET',
 
@@ -111,20 +118,25 @@ fetch('http://127.0.0.1:5000/activities', {
 });   
 }
 
-async function getNewTasks(){
+async function addNewTasks(){
   
   
   activityName=document.getElementById("title").value;
   console.log(activityName);
+  console.log('Title lenth is - ',activityName.length);
 
   activityDesc=document.getElementById("description").value;
   console.log(activityDesc);
+  console.log("desc len is ",activityDesc.length);
+
+  // Check if entries have been added
+  if (activityName.length != 0 || activityDesc.length != 0){
   apiInsert='http://127.0.0.1:5000/insert/'+activityName+"/"+activityDesc
   console.log(apiInsert)
 
   Promise.all([
 
-    fetch('http://127.0.0.1:5000/insert/'+activityName+'/'+activityDesc, {
+    fetch(apiInsert, {
         method: 'POST',
     
         headers: { 'Content-type': 'application/x-www-form-urlencoded' },
@@ -133,9 +145,21 @@ async function getNewTasks(){
       
       allTasks();
     
-    }).catch((err) => {
+    }).then(document.getElementById('description').value = ''
+    ).then(
+      document.getElementById('title').value = ''
+    ).then(
+      alert("Activity -"+activityName+" has been successfully added")
+    ).
+    catch((err) => {
         console.error(err);
     }); 
 
+  }
+  else{
+        let msg="Entries cannot be blank";
+        document.getElementById("forceEnter").style.display="block";
+        document.getElementById("forceEnter").innerHTML = msg;
+  }
 
 }

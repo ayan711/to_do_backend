@@ -36,7 +36,7 @@ def allActivity():
 
 # @app.route('/insert')
 # def insertActivity():
-@app.route('/insert/<string:activity_desc>/<string:activity>',methods = ['POST'])
+@app.route('/insert/<string:activity>/<string:activity_desc>',methods = ['POST'])
 def insertActivity(activity_desc,activity):
 
     ## Cursor objects interact with the MySQL server using a MySQLConnection object.
