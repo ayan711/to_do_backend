@@ -73,30 +73,28 @@ def deleteActivity(id):
 
     return "Deleted entry"
 
-'''
-@app.route('/insert/<int:activity_ID>/<string:activity_desc>/<string:activity>')
-def insertActivity(activity_ID,activity_desc,activity):
-    #def insertActivity(activity_ID,activity,activity_desc):
 
-    # activity_ID = request.args.get("activity_ID")
-    # activity = request.args.get("activity")
-    # activity_desc = request.args.get("activity_desc")
+@app.route('/update/<int:id>/<string:activity>/<string:activity_desc>')
+def updateActivity(id,activity,activity_desc):
+    try:
+        ## Cursor objects interact with the MySQL server using a MySQLConnection object.
+        cur = mysql.connection.cursor()
 
-    ## Cursor objects interact with the MySQL server using a MySQLConnection object.
-    cur = mysql.connection.cursor()
+        query_addActivity="UPDATE to_do.user_activity SET activity_desc=%s,activity=%s WHERE id=%s"
+        cur.execute(query_addActivity,(activity,activity_desc,id) )
 
-
-    query_addActivity="INSERT INTO user_activity VALUES (%s,%s,%s,default)" # WHERE State like %s AND County like %s "
-    cur.execute(query_addActivity,(activity_ID,activity,activity_desc) )
-
-    ## Since auto commit does not happens....using commit to modify the table
-    mysql.connection.commit()
+        ## Since auto commit does not happens....using commit to modify the table
+        mysql.connection.commit()
 
 
-    print('Added entry')
+        print('Updated entry')
 
-    return "Added entry"
-'''
+        return "Updated entry"
+    
+    except Exception as e:
+        print(e)
+        return jsonify(e)
+
 
 
 if __name__ == '__main__':

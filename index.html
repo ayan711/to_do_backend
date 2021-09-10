@@ -19,6 +19,7 @@
             width: 70%;
 
         }
+        .btn btn-info btn-sm btn-success > div { display: none; }
     </style>
 </head>
 
@@ -78,7 +79,6 @@
         <button type="submit" id="add" class="btn btn-primary" onclick="addNewTasks()">Add to list</button>
         <div class="alert alert-danger" role="alert" id="forceEnter"></div>
 
-        <!-- <div id="items" class="my-4">
             <h2>Your Items</h2>
             <table class="table" id="activity_tab">
                 <thead>
@@ -110,13 +110,13 @@
 
 <!-- <script src='main.js'></script> -->
 
-<table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" >
+<table class="display table-bordered table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" >
     <thead class='table-dark'>
         <tr>
             <th scope="col">Sr. No.  </th>
             <th scope="col">Activity Name  </th>
             <th scope="col">Description   </th>
-            <th scope="col">Actions </th>
+            <th scope="col" id ="operations">Actions </th>
         </tr>
     </thead>
     <tbody id = "data">
@@ -141,13 +141,6 @@
 
     ...
 }); -->
-
-
-
-
-
-
-
 
     </div>
 
