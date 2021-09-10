@@ -11,6 +11,16 @@
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="main.js" type="application/javascript"></script>
     <title>TODOs List</title>
+    <style>
+
+        #activityDisplay{
+            margin-left: 50mm;
+            text-align:center;
+            width: 70%;
+
+        }
+        .btn btn-info btn-sm btn-success > div { display: none; }
+    </style>
 </head>
 
 <body>
@@ -58,56 +68,36 @@
 
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
-            <small id="emailHelp" class="form-text text-muted">Add an item to the list.</small>
+            <input type="text" class="form-control" id="title" aria-describedby="emailHelp" required="required">
+            <small id="emailHelp" class="form-text text-muted">Add an activity to the list.</small>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <textarea class="form-control" id="description" rows="3" required="required"></textarea>
         </div>
 
-        <button type="submit" id="add" class="btn btn-primary">Add to list</button>
+        <button type="submit" id="add" class="btn btn-primary" onclick="addNewTasks()">Add to list</button>
+        <div class="alert alert-danger" role="alert" id="forceEnter"></div>
 
-        <!-- <div id="items" class="my-4">
-            <h2>Your Items</h2>
-            <table class="table" id="activity_tab">
-                <thead>
-                    <tr>
-                        <th scope="col">Sr. No.</th>
-                        <th scope="col">Item Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <!-- <th scope="row"></th>
-                        <td>Get some coffee</td>
-                        <td>Coffee is essential</td>
-                        <td><button class="btn btn-danger btn-sm btn-primary">Delete</button></td> -->
-
-                    </tr>
-                </tbody>
-            </table>
+            
         </div> 
     </div>
 
     <div class="container">
-    <h3>Activities present :</h3>
+    <h3>Activities Performed :</h3>
     <br>
-    <div id='activities'>  </div>
   
 </div>
 
 <!-- <script src='main.js'></script> -->
 
-<table class="display table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" style="width: 600px;">
+<table class="display table-bordered table-striped table-hover px-md-5 justify-content-center " id="activityDisplay" >
     <thead class='table-dark'>
         <tr>
             <th scope="col">Sr. No.  </th>
-            <th scope="col">Item Title  </th>
+            <th scope="col">Activity Name  </th>
             <th scope="col">Description   </th>
-            <th scope="col">Actions </th>
+            <th scope="col" id ="operations">Actions </th>
         </tr>
     </thead>
     <tbody id = "data">
@@ -117,6 +107,7 @@
         </tr>
     </tbody>
 </table>
+
 
 <br>
 <br>
@@ -131,13 +122,6 @@
 
     ...
 }); -->
-
-
-
-
-
-
-
 
     </div>
 
