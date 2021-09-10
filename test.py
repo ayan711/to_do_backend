@@ -81,7 +81,7 @@ def updateActivity(id,activity,activity_desc):
         cur = mysql.connection.cursor()
 
         query_addActivity="UPDATE to_do.user_activity SET activity_desc=%s,activity=%s WHERE id=%s"
-        cur.execute(query_addActivity,(activity,activity_desc,id) )
+        cur.execute(query_addActivity,(activity_desc,activity,id) )
 
         ## Since auto commit does not happens....using commit to modify the table
         mysql.connection.commit()

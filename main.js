@@ -2,7 +2,10 @@ const paragraph = document.getElementById("edit");
 
 //requiring path and fs modules
 window.onload = function(){
-  $('.btn btn-info btn-sm btn-success').hide();
+
+  $(document).ready(function() {
+    $('#btn btn-success btn-sm btn-primary').hide();
+  });
   allTasks();
 
   //document.getElementById('forceEnter').style.display = 'none';
@@ -183,7 +186,8 @@ async function updateActivity(tableData){
   const activityName = document.getElementById("name"+id);
   const activityDescription = document.getElementById("desc"+id);
   const endUpdate = document.getElementById("done"+id);
-  console.log(activityName)
+  console.log(activityName.innerHTML);
+  console.log(activityDescription.innerHTML);
 
   // making selected row's data editable
   activityName.contentEditable = true;
@@ -200,12 +204,62 @@ async function updateActivity(tableData){
   activityDescription.contentEditable = false;
   activityName.style.backgroundColor = "#ffe44d";
   activityDescription.style.backgroundColor= "#ffe44d";
+  
+  console.log(activityName.innerHTML);
+  console.log(activityDescription.innerHTML);
+
+  activityNameNew=activityName.innerHTML;
+  activityDescNew=activityDescription.innerHTML;
+  console.log("Description is ",activityDescNew);
+  console.log("Activity is ",activityNameNew);
+
+  postNewVal(id,activityNameNew,activityDescNew);
   } )
 
-  activityNameNew=document.getElementById(activityName).value;
-  activityDescNew=document.getElementById(activityDescription).value;
-  console.log(activityDescNew);
-  console.log(activityNameNew);
+
+  //return activityNameNew,activityDescNew;
+  // Promise.all([
+  //   endUpdate.addEventListener("click", function() {
+  //     // making selected row's data uneditable
+  //   activityName.contentEditable = false;
+  //   activityDescription.contentEditable = false;
+  //   activityName.style.backgroundColor = "#ffe44d";
+  //   activityDescription.style.backgroundColor= "#ffe44d";
+    
+  //   console.log(activityName.innerHTML);
+  //   console.log(activityDescription.innerHTML);
+  
+  //   activityNameNew=activityName.innerHTML;
+  //   activityDescNew=activityDescription.innerHTML;
+  //   console.log(activityDescNew);
+  //   console.log(activityNameNew);
+
+  //   } )
+  //])
+
+  
+}
+
+
+async function postNewVal(id,activityNameNew,activityDescNew){
+
+  Promise.all([
+
+      fetch('http://127.0.0.1:5000/update/'+id+'/'+activityNameNew+'/'+activityDescNew, {
+          method: 'GET',
+      
+          headers: { 'Content-type': 'application/x-www-form-urlencoded' },
+      
+      })]).then(async([aa]) => {
+      
+
+            // Calling allTasks to get the new data after delete
+            await allTasks();
+            console.log('Records Updated');
+      
+          })
+
+}
 
   // Promise.all([
 
@@ -231,8 +285,3 @@ async function updateActivity(tableData){
   //   }).catch((err) => {
   //       console.error(err);
   //   });
-  
-  
-
-  
-}
